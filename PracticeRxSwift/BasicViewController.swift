@@ -1,0 +1,221 @@
+//
+//  ViewController.swift
+//  PracticeRxSwift
+//
+//  Created by 김정윤 on 7/30/24.
+//
+
+import UIKit
+import RxSwift
+import RxCocoa
+import SnapKit
+
+final class BasicViewController: BaseViewController {
+    private let disposeBag = DisposeBag()
+    private let button = UIButton()
+    private let resultLabel = UILabel()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        just()
+        of()
+        from()
+        take()
+    }
+    
+    override func setupHierarchy() {
+        view.addSubview(button)
+        view.addSubview(resultLabel)
+    }
+    
+    override func setupConstraints() {
+        resultLabel.snp.makeConstraints { make in
+            make.centerY.equalTo(view.safeAreaLayoutGuide).offset(-48)
+            make.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(16)
+            make.height.equalTo(56)
+        }
+        
+        button.snp.makeConstraints { make in
+            make.top.equalTo(resultLabel.snp.bottom).offset(12)
+            make.centerX.equalTo(resultLabel.snp.centerX)
+            make.height.equalTo(44)
+            make.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(48)
+        }
+    }
+    
+    override func setupUI() {
+        super.setupUI()
+        resultLabel.backgroundColor = .systemGray6
+        button.backgroundColor = .systemYellow
+        button.setTitle("눌러보세용", for: .normal)
+    }
+    
+    override func bind() {
+        // Observable : User Interaction, 사용자의 행위를 통해 이벤트를 전달하는 역할
+        // - Operator를 통해 보내주는 이벤트(데이터)를 가공할 수 있음
+        // ex) 버튼 클릭, 셀 클릭, 텍스트 입력 등
+        // Observer : 이벤트가 전달(= 방출)되면 해당 이벤트를 처리하는 역할
+        // ex) 버튼 눌렀을 때의 화면전환, 닉네임 유효성 처리 등
+        // => Observable은 Subscriber를 통해 Observer에게 관찰당함
+        //  => 그래서 무언가 값이 바뀔 때마다 Observer의 처리구문이 실행
+        // ex) 유튜브
+        // bind : UI와 관련된 구문은 항상 메인스레드에서 실행되어야하며 에러가 발생할 확률이 0%
+        // - 이는 곧 Error, Complete에 대한 이벤트 처리가 불필요하다는 의미
+        // - 그리고 Rx의 subscribe의 경우 스레드를 가리지않기 때문에 메인스레드에서 처리하는건 꼭 GCD나 .observe(on:)을 통해 명시해줘야했음
+        // 이러한 두 가지 사항을 한 번에 개선해낸게 bind!
+        // 불필요한 이벤트를 애초에 받지않으면서 개발자가 명시해주지않아도 알아서 메인스레드에서 처리해주도록 만들어짐
+        
+        // (1)
+        // - 기본적인 형태
+        button.rx.tap
+            .subscribe { _ in
+                self.resultLabel.text = "버튼을 클릭했어요!!!"
+            } onError: { error in
+                print(error)
+            } onCompleted: {
+                print("completed!")
+            } onDisposed: {
+                print("disposed!")
+            }.disposed(by: disposeBag)
+
+        // (2)
+        // - Label에 텍스트 세팅은 UI적인 부분이라 Error, Complete(X)
+        // - Error, Complete 이벤트 자체를 받지않는 형태
+        button.rx.tap
+            .subscribe { _ in
+                self.resultLabel.text = "버튼을 클릭했어요!!!"
+            } onDisposed: {
+                print("disposed!")
+            }.disposed(by: disposeBag)
+
+        // (3)
+        // - 메모리 누수 방지 형태
+        button.rx.tap
+            .subscribe { [weak self] _ in
+                guard let self else { return }
+                self.resultLabel.text = "버튼을 클릭했어요!!!"
+            } onDisposed: {
+                print("disposed!")
+            }.disposed(by: disposeBag)
+
+        // (4)
+        // - [weak self] 대신 withUnretained 사용 형태
+        button.rx.tap
+            .withUnretained(self)
+            .subscribe { _ in
+                self.resultLabel.text = "버튼을 클릭했어요!!!"
+            } onDisposed: {
+                print("disposed!")
+            }.disposed(by: disposeBag)
+        
+        // (5)
+        // - subscribe 할 때, with를 통해 self를 옵셔널 바인딩해서 가져옴
+        // - self를 풀어온 owner를 사용해줘야 진짜
+        button.rx.tap
+            .subscribe(with: self) { owner, _ in
+                owner.resultLabel.text = "버튼을 클릭했어요!!!"
+            } onDisposed: { owner in
+                print("disposed!")
+            }.disposed(by: disposeBag)
+        
+        // (6)
+        // - subscribe : 스레드 상관없이 동작해서 백그라운드에서도 동작 가능
+        // - 그러니까 UI와 관련된건 메인에서 처리해달라고 DispatchQueue.main.async 처리해줘야함
+        button.rx.tap
+            .subscribe(with: self, onNext: { owner, _ in
+                DispatchQueue.main.async {
+                    owner.resultLabel.text = "버튼을 클릭했어요!!!"
+                }
+            }, onDisposed: { owner in
+                print("disposed!")
+            }).disposed(by: disposeBag)
+        
+        // (7)
+        // - Rx가 지원해주는 GCD를 사용하자!
+        button.rx.tap
+            .observe(on: MainScheduler.instance)
+            .subscribe(with: self) { owner, _ in
+                owner.resultLabel.text = "버튼을 클릭했어요!!!"
+            } onDisposed: { owner in
+                print("disposed!")
+            }.disposed(by: disposeBag)
+
+        // (8)
+        // - 근데 그럼 또 코드를 한 줄 더 써야하니까 아예 subscribe가 메인스레드에서 동작하게 하자
+        // - 그리고 UI관련 코드는 Error, Complete가 발생할 일이 없으니까 둘을 받지않는 subscribe문을 쓰자
+        // => bind의 등장!
+        button.rx.tap
+            .bind(with: self) { owner, _ in
+                owner.resultLabel.text = "버튼을 클릭했어요!!!"
+            }.disposed(by: disposeBag)
+    }
+    
+    private func just() {
+        // 파라미터로 하나의 값만 받아 Observable을 반환
+        // = 하나의 값만 방출(emit)
+        let items = [3.3, 4.0, 5.0, 2.0, 3.6, 4.8]
+        
+        Observable.just(items)
+            .subscribe { value in
+                print("just : \(value)")
+            } onError: { error in
+                print("just error : \(error)")
+            } onCompleted: {
+                print("complted!")
+            } onDisposed: {
+                print("disposed!")
+            }.disposed(by: disposeBag)
+    }
+    
+    private func of() {
+        // element Parameters가 가변 파라미터로 선언되어있음
+        // => 여러 가지의 값을 동시에 전달 가능!
+        // = 2개 이상의 값 방출(emit)
+        let itemsA = [1, 2, 3, 4, 5]
+        let itemsB = [6, 7, 8]
+        
+        Observable.of(itemsA, itemsB)
+            .subscribe { value in
+                print("of : \(value)")
+            } onError: { error in
+                print("of error : \(error)")
+            } onCompleted: {
+                print("of completed!")
+            } onDisposed: {
+                print("of disposed")
+            }.disposed(by: disposeBag)
+    }
+    
+    private func from() {
+        // 배열 내 각각의 데이터를 방출(emit)하고 싶다면 from 사용
+        // array Parameters로 배열을 받고, 배열의 각 element를 Observable로 반환
+        let itemsA = [1, 2, 3, 4, 5]
+        
+        Observable.from(itemsA)
+            .subscribe { value in
+                print("from : \(value)")
+            } onError: { error in
+                print("from error : \(error)")
+            } onCompleted: {
+                print("completed!")
+            } onDisposed: {
+                print("disposed")
+            }.disposed(by: disposeBag)
+    }
+    
+    private func take() {
+        // 방출된 아이템 중 처음 n개의 아이템을 내보냄
+        Observable.repeatElement("Yunie") // Yunie 무한반복
+            .take(1) // 1개의 아이템만 내보내고 멈추기
+            .subscribe { value in
+                print("repeat : \(value)")
+            } onError: { error in
+                print("reapeat error : \(error)")
+            } onCompleted: {
+                print("completed!")
+            } onDisposed: {
+                print("disposed")
+            }.disposed(by: disposeBag)
+    }
+}
+
