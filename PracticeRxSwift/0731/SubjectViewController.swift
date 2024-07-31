@@ -57,5 +57,12 @@ final class SubjectViewController: BaseViewController {
         
         behaviorInt.onNext(9)
         // 결과: next(Behavior: 9 + A)
+        
+        
+        // ========================================
+        
+        // 둘은 어떨 때 사용될까
+        // - Publish는 초깃값이 필요없으니까 리캡의 검색화면 내 데이터 같은거 아닐까
+        // - Behavior는 초깃값이 있으니까 좋아요 화면이나 프로필 편집뷰..?
     }
 }
