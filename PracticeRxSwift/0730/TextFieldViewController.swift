@@ -60,13 +60,6 @@ final class TextFieldViewController: BaseViewController {
         signButton.setTitle("완료", for: .normal)
     }
     
-    private func showAlert() {
-        let alert = UIAlertController(title: "회원가입", message: "회원가입이 완료됐습니다!", preferredStyle: .alert)
-        let confirm = UIAlertAction(title: "확인", style: .cancel)
-        alert.addAction(confirm)
-        present(alert, animated: true)
-    }
-    
     override func bind() {
         // source1, 2 묶어서 처리
         // - orEmpty : textField.text = String?을 String으로 반환

@@ -33,4 +33,11 @@ class BaseViewController: UIViewController {
         
     }
     
+    func showAlert(title: String = "회원가입", message: String = "회원가입이 완료됐습니다!") {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let confirm = UIAlertAction(title: "확인", style: .cancel)
+        alert.addAction(confirm)
+        present(alert, animated: true)
+    }
+    
 }
