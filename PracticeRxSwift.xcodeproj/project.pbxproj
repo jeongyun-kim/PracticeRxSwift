@@ -25,6 +25,19 @@
 		E0E50D062C5A0E2C00B789E2 /* ValidationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E50D052C5A0E2C00B789E2 /* ValidationViewController.swift */; };
 		E0E50D082C5A723000B789E2 /* SimpleTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E50D072C5A723000B789E2 /* SimpleTableViewController.swift */; };
 		E0E50D0A2C5A758B00B789E2 /* SubjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E50D092C5A758B00B789E2 /* SubjectViewController.swift */; };
+		E0E50D0F2C5CABDF00B789E2 /* PointButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E50D0C2C5CABDF00B789E2 /* PointButton.swift */; };
+		E0E50D102C5CABDF00B789E2 /* SignTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E50D0D2C5CABDF00B789E2 /* SignTextField.swift */; };
+		E0E50D142C5CABE600B789E2 /* PasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E50D112C5CABE600B789E2 /* PasswordViewController.swift */; };
+		E0E50D152C5CABE600B789E2 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E50D122C5CABE600B789E2 /* SignUpViewController.swift */; };
+		E0E50D192C5CABEC00B789E2 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E50D162C5CABEC00B789E2 /* SignInViewController.swift */; };
+		E0E50D1A2C5CABEC00B789E2 /* SignInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E50D172C5CABEC00B789E2 /* SignInViewModel.swift */; };
+		E0E50D1F2C5CABF500B789E2 /* BirthdayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E50D1B2C5CABF500B789E2 /* BirthdayViewController.swift */; };
+		E0E50D202C5CABF500B789E2 /* NicknameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E50D1C2C5CABF500B789E2 /* NicknameViewController.swift */; };
+		E0E50D212C5CABF500B789E2 /* PhoneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E50D1D2C5CABF500B789E2 /* PhoneViewController.swift */; };
+		E0E50D262C5CABFC00B789E2 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E50D222C5CABFC00B789E2 /* DetailViewController.swift */; };
+		E0E50D272C5CABFC00B789E2 /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E50D232C5CABFC00B789E2 /* SearchTableViewCell.swift */; };
+		E0E50D282C5CABFC00B789E2 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E50D242C5CABFC00B789E2 /* SearchViewController.swift */; };
+		E0E50D2A2C5CAC4900B789E2 /* Resource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E50D292C5CAC4900B789E2 /* Resource.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +58,19 @@
 		E0E50D052C5A0E2C00B789E2 /* ValidationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationViewController.swift; sourceTree = "<group>"; };
 		E0E50D072C5A723000B789E2 /* SimpleTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleTableViewController.swift; sourceTree = "<group>"; };
 		E0E50D092C5A758B00B789E2 /* SubjectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectViewController.swift; sourceTree = "<group>"; };
+		E0E50D0C2C5CABDF00B789E2 /* PointButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PointButton.swift; sourceTree = "<group>"; };
+		E0E50D0D2C5CABDF00B789E2 /* SignTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignTextField.swift; sourceTree = "<group>"; };
+		E0E50D112C5CABE600B789E2 /* PasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasswordViewController.swift; sourceTree = "<group>"; };
+		E0E50D122C5CABE600B789E2 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		E0E50D162C5CABEC00B789E2 /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
+		E0E50D172C5CABEC00B789E2 /* SignInViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewModel.swift; sourceTree = "<group>"; };
+		E0E50D1B2C5CABF500B789E2 /* BirthdayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BirthdayViewController.swift; sourceTree = "<group>"; };
+		E0E50D1C2C5CABF500B789E2 /* NicknameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NicknameViewController.swift; sourceTree = "<group>"; };
+		E0E50D1D2C5CABF500B789E2 /* PhoneViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhoneViewController.swift; sourceTree = "<group>"; };
+		E0E50D222C5CABFC00B789E2 /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		E0E50D232C5CABFC00B789E2 /* SearchTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
+		E0E50D242C5CABFC00B789E2 /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		E0E50D292C5CAC4900B789E2 /* Resource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Resource.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,7 +107,10 @@
 		E02F9D222C58D8C100FC256A /* PracticeRxSwift */ = {
 			isa = PBXGroup;
 			children = (
+				E0E50D292C5CAC4900B789E2 /* Resource.swift */,
 				E02F9D3F2C58D99500FC256A /* BaseViewController.swift */,
+				E0E50D0E2C5CABDF00B789E2 /* CustomView */,
+				E0E50D0B2C5CABD500B789E2 /* 0801 */,
 				E02F9D532C5A04CF00FC256A /* 0730 */,
 				E02F9D542C5A04DE00FC256A /* 0731 */,
 				E02F9D232C58D8C100FC256A /* AppDelegate.swift */,
@@ -114,6 +143,64 @@
 				E0E50D092C5A758B00B789E2 /* SubjectViewController.swift */,
 			);
 			path = 0731;
+			sourceTree = "<group>";
+		};
+		E0E50D0B2C5CABD500B789E2 /* 0801 */ = {
+			isa = PBXGroup;
+			children = (
+				E0E50D132C5CABE600B789E2 /* SignUp */,
+				E0E50D1E2C5CABF500B789E2 /* SignUpOptional */,
+				E0E50D182C5CABEC00B789E2 /* SignIn */,
+				E0E50D252C5CABFC00B789E2 /* Search */,
+			);
+			path = 0801;
+			sourceTree = "<group>";
+		};
+		E0E50D0E2C5CABDF00B789E2 /* CustomView */ = {
+			isa = PBXGroup;
+			children = (
+				E0E50D0C2C5CABDF00B789E2 /* PointButton.swift */,
+				E0E50D0D2C5CABDF00B789E2 /* SignTextField.swift */,
+			);
+			path = CustomView;
+			sourceTree = "<group>";
+		};
+		E0E50D132C5CABE600B789E2 /* SignUp */ = {
+			isa = PBXGroup;
+			children = (
+				E0E50D112C5CABE600B789E2 /* PasswordViewController.swift */,
+				E0E50D122C5CABE600B789E2 /* SignUpViewController.swift */,
+			);
+			path = SignUp;
+			sourceTree = "<group>";
+		};
+		E0E50D182C5CABEC00B789E2 /* SignIn */ = {
+			isa = PBXGroup;
+			children = (
+				E0E50D162C5CABEC00B789E2 /* SignInViewController.swift */,
+				E0E50D172C5CABEC00B789E2 /* SignInViewModel.swift */,
+			);
+			path = SignIn;
+			sourceTree = "<group>";
+		};
+		E0E50D1E2C5CABF500B789E2 /* SignUpOptional */ = {
+			isa = PBXGroup;
+			children = (
+				E0E50D1B2C5CABF500B789E2 /* BirthdayViewController.swift */,
+				E0E50D1C2C5CABF500B789E2 /* NicknameViewController.swift */,
+				E0E50D1D2C5CABF500B789E2 /* PhoneViewController.swift */,
+			);
+			path = SignUpOptional;
+			sourceTree = "<group>";
+		};
+		E0E50D252C5CABFC00B789E2 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				E0E50D222C5CABFC00B789E2 /* DetailViewController.swift */,
+				E0E50D232C5CABFC00B789E2 /* SearchTableViewCell.swift */,
+				E0E50D242C5CABFC00B789E2 /* SearchViewController.swift */,
+			);
+			path = Search;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -196,18 +283,31 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E0E50D102C5CABDF00B789E2 /* SignTextField.swift in Sources */,
 				E02F9D4E2C59368C00FC256A /* TextFieldViewController.swift in Sources */,
 				E0E50D0A2C5A758B00B789E2 /* SubjectViewController.swift in Sources */,
 				E02F9D422C58DD0300FC256A /* PickerViewController.swift in Sources */,
 				E0E50D082C5A723000B789E2 /* SimpleTableViewController.swift in Sources */,
 				E0E50D032C5A05C400B789E2 /* AddNumberViewController.swift in Sources */,
+				E0E50D212C5CABF500B789E2 /* PhoneViewController.swift in Sources */,
 				E02F9D4A2C58E1A300FC256A /* TableViewController.swift in Sources */,
+				E0E50D272C5CABFC00B789E2 /* SearchTableViewCell.swift in Sources */,
+				E0E50D192C5CABEC00B789E2 /* SignInViewController.swift in Sources */,
+				E0E50D1F2C5CABF500B789E2 /* BirthdayViewController.swift in Sources */,
 				E02F9D282C58D8C100FC256A /* BasicViewController.swift in Sources */,
+				E0E50D262C5CABFC00B789E2 /* DetailViewController.swift in Sources */,
 				E02F9D402C58D99500FC256A /* BaseViewController.swift in Sources */,
 				E02F9D242C58D8C100FC256A /* AppDelegate.swift in Sources */,
+				E0E50D152C5CABE600B789E2 /* SignUpViewController.swift in Sources */,
 				E02F9D262C58D8C100FC256A /* SceneDelegate.swift in Sources */,
+				E0E50D142C5CABE600B789E2 /* PasswordViewController.swift in Sources */,
+				E0E50D2A2C5CAC4900B789E2 /* Resource.swift in Sources */,
+				E0E50D282C5CABFC00B789E2 /* SearchViewController.swift in Sources */,
+				E0E50D1A2C5CABEC00B789E2 /* SignInViewModel.swift in Sources */,
+				E0E50D202C5CABF500B789E2 /* NicknameViewController.swift in Sources */,
 				E02F9D4C2C59354700FC256A /* SwitchViewController.swift in Sources */,
 				E0E50D062C5A0E2C00B789E2 /* ValidationViewController.swift in Sources */,
+				E0E50D0F2C5CABDF00B789E2 /* PointButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
