@@ -21,6 +21,7 @@
 		E02F9D4A2C58E1A300FC256A /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E02F9D492C58E1A300FC256A /* TableViewController.swift */; };
 		E02F9D4C2C59354700FC256A /* SwitchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E02F9D4B2C59354700FC256A /* SwitchViewController.swift */; };
 		E02F9D4E2C59368C00FC256A /* TextFieldViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E02F9D4D2C59368C00FC256A /* TextFieldViewController.swift */; };
+		E05AF32C2C5D33CB008BB813 /* UIViewController + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E05AF32B2C5D33CB008BB813 /* UIViewController + Extension.swift */; };
 		E0E50D032C5A05C400B789E2 /* AddNumberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E50D022C5A05C400B789E2 /* AddNumberViewController.swift */; };
 		E0E50D062C5A0E2C00B789E2 /* ValidationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E50D052C5A0E2C00B789E2 /* ValidationViewController.swift */; };
 		E0E50D082C5A723000B789E2 /* SimpleTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E50D072C5A723000B789E2 /* SimpleTableViewController.swift */; };
@@ -54,6 +55,7 @@
 		E02F9D492C58E1A300FC256A /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		E02F9D4B2C59354700FC256A /* SwitchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchViewController.swift; sourceTree = "<group>"; };
 		E02F9D4D2C59368C00FC256A /* TextFieldViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldViewController.swift; sourceTree = "<group>"; };
+		E05AF32B2C5D33CB008BB813 /* UIViewController + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController + Extension.swift"; sourceTree = "<group>"; };
 		E0E50D022C5A05C400B789E2 /* AddNumberViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNumberViewController.swift; sourceTree = "<group>"; };
 		E0E50D052C5A0E2C00B789E2 /* ValidationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationViewController.swift; sourceTree = "<group>"; };
 		E0E50D072C5A723000B789E2 /* SimpleTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleTableViewController.swift; sourceTree = "<group>"; };
@@ -118,6 +120,7 @@
 				E02F9D2C2C58D8C200FC256A /* Assets.xcassets */,
 				E02F9D2E2C58D8C200FC256A /* LaunchScreen.storyboard */,
 				E02F9D312C58D8C200FC256A /* Info.plist */,
+				E05AF32B2C5D33CB008BB813 /* UIViewController + Extension.swift */,
 			);
 			path = PracticeRxSwift;
 			sourceTree = "<group>";
@@ -307,6 +310,7 @@
 				E0E50D202C5CABF500B789E2 /* NicknameViewController.swift in Sources */,
 				E02F9D4C2C59354700FC256A /* SwitchViewController.swift in Sources */,
 				E0E50D062C5A0E2C00B789E2 /* ValidationViewController.swift in Sources */,
+				E05AF32C2C5D33CB008BB813 /* UIViewController + Extension.swift in Sources */,
 				E0E50D0F2C5CABDF00B789E2 /* PointButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

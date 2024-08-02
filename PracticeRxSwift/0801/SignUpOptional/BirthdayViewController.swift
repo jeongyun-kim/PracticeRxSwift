@@ -105,11 +105,12 @@ final class BirthdayViewController: BaseViewController {
     }
 
     override func bind() {
-        // 다음 버튼 눌렀을 때 화면전환
+        // 다음 버튼 눌렀을 때 Alert
         nextButton.rx.tap
             .bind(with: self) { owner, _ in
-                let vc = SearchViewController()
-                owner.navigationController?.pushViewController(vc, animated: true)
+                owner.showAlert { _ in
+                    owner.setNewScene(SearchViewController())
+                }
             }.disposed(by: disposeBag)
         
         // 날짜 변경할 때마다 변경
