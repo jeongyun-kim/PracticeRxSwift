@@ -25,6 +25,8 @@
 		E08B3E982C5DF31200E7EB4D /* ShoppingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E08B3E972C5DF31200E7EB4D /* ShoppingViewController.swift */; };
 		E08B3E9A2C5DF5F000E7EB4D /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = E08B3E992C5DF5F000E7EB4D /* Item.swift */; };
 		E08B3E9C2C5DF75400E7EB4D /* ShoppingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E08B3E9B2C5DF75400E7EB4D /* ShoppingTableViewCell.swift */; };
+		E08B3E9E2C5E028000E7EB4D /* ShoppingSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E08B3E9D2C5E028000E7EB4D /* ShoppingSearchViewController.swift */; };
+		E08B3EA02C5E038D00E7EB4D /* ShoppingDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E08B3E9F2C5E038D00E7EB4D /* ShoppingDetailViewController.swift */; };
 		E0E50D032C5A05C400B789E2 /* AddNumberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E50D022C5A05C400B789E2 /* AddNumberViewController.swift */; };
 		E0E50D062C5A0E2C00B789E2 /* ValidationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E50D052C5A0E2C00B789E2 /* ValidationViewController.swift */; };
 		E0E50D082C5A723000B789E2 /* SimpleTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E50D072C5A723000B789E2 /* SimpleTableViewController.swift */; };
@@ -62,6 +64,8 @@
 		E08B3E972C5DF31200E7EB4D /* ShoppingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingViewController.swift; sourceTree = "<group>"; };
 		E08B3E992C5DF5F000E7EB4D /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		E08B3E9B2C5DF75400E7EB4D /* ShoppingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingTableViewCell.swift; sourceTree = "<group>"; };
+		E08B3E9D2C5E028000E7EB4D /* ShoppingSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingSearchViewController.swift; sourceTree = "<group>"; };
+		E08B3E9F2C5E038D00E7EB4D /* ShoppingDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingDetailViewController.swift; sourceTree = "<group>"; };
 		E0E50D022C5A05C400B789E2 /* AddNumberViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNumberViewController.swift; sourceTree = "<group>"; };
 		E0E50D052C5A0E2C00B789E2 /* ValidationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationViewController.swift; sourceTree = "<group>"; };
 		E0E50D072C5A723000B789E2 /* SimpleTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleTableViewController.swift; sourceTree = "<group>"; };
@@ -160,6 +164,8 @@
 				E08B3E972C5DF31200E7EB4D /* ShoppingViewController.swift */,
 				E08B3E992C5DF5F000E7EB4D /* Item.swift */,
 				E08B3E9B2C5DF75400E7EB4D /* ShoppingTableViewCell.swift */,
+				E08B3E9D2C5E028000E7EB4D /* ShoppingSearchViewController.swift */,
+				E08B3E9F2C5E038D00E7EB4D /* ShoppingDetailViewController.swift */,
 			);
 			path = Shopping;
 			sourceTree = "<group>";
@@ -312,6 +318,7 @@
 				E02F9D422C58DD0300FC256A /* PickerViewController.swift in Sources */,
 				E0E50D082C5A723000B789E2 /* SimpleTableViewController.swift in Sources */,
 				E0E50D032C5A05C400B789E2 /* AddNumberViewController.swift in Sources */,
+				E08B3EA02C5E038D00E7EB4D /* ShoppingDetailViewController.swift in Sources */,
 				E0E50D212C5CABF500B789E2 /* PhoneViewController.swift in Sources */,
 				E02F9D4A2C58E1A300FC256A /* TableViewController.swift in Sources */,
 				E0E50D272C5CABFC00B789E2 /* SearchTableViewCell.swift in Sources */,
@@ -319,6 +326,7 @@
 				E0E50D1F2C5CABF500B789E2 /* BirthdayViewController.swift in Sources */,
 				E02F9D282C58D8C100FC256A /* BasicViewController.swift in Sources */,
 				E0E50D262C5CABFC00B789E2 /* DetailViewController.swift in Sources */,
+				E08B3E9E2C5E028000E7EB4D /* ShoppingSearchViewController.swift in Sources */,
 				E02F9D402C58D99500FC256A /* BaseViewController.swift in Sources */,
 				E02F9D242C58D8C100FC256A /* AppDelegate.swift in Sources */,
 				E0E50D152C5CABE600B789E2 /* SignUpViewController.swift in Sources */,

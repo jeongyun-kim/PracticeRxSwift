@@ -88,6 +88,24 @@ final class ShoppingViewController: BaseViewController {
                 }.disposed(by: cell.disposeBag)
         }.disposed(by: disposeBag)
         
+        // 테이블뷰 셀 선택 시 상세정보뷰 불러오기
+        // - 상세정보로 현재 상품명 보내주기 
+        // - 상세정보에서 상품명 수정하고 돌아오면 리스트 업데이트
+        Observable
+            .zip(tableView.rx.itemSelected, tableView.rx.modelSelected(Item.self))
+            .subscribe(with: self) { owner, value in
+                // 상세정보뷰로 현재 선택한 상품명 보내기
+                let itemName = value.1.name
+                let vc = ShoppingDetailViewController()
+                vc.itemName.accept(itemName)
+                // 상세정보에서 상품명을 수정했다면 수정한 이름으로 데이터 재구성
+                vc.sendItem = { newItemName in
+                    owner.list[value.0.row].name = newItemName
+                    owner.items.accept(owner.list)
+                }
+                owner.navigationController?.pushViewController(vc, animated: true)
+            }.disposed(by: disposeBag)
+        
         // 추가버튼 눌렀을 때 아이템 추가
         addButton.rx.tap
             .bind(with: self) { owner, _ in

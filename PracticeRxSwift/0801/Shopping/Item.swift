@@ -8,7 +8,7 @@
 import Foundation
 
 struct Item {
-    let name: String
+    var name: String
     var isComplete: Bool = false
     var bookmark: Bool = false
 }
