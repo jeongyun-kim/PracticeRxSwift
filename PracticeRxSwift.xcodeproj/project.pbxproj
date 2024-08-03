@@ -22,6 +22,9 @@
 		E02F9D4C2C59354700FC256A /* SwitchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E02F9D4B2C59354700FC256A /* SwitchViewController.swift */; };
 		E02F9D4E2C59368C00FC256A /* TextFieldViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E02F9D4D2C59368C00FC256A /* TextFieldViewController.swift */; };
 		E05AF32C2C5D33CB008BB813 /* UIViewController + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E05AF32B2C5D33CB008BB813 /* UIViewController + Extension.swift */; };
+		E08B3E982C5DF31200E7EB4D /* ShoppingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E08B3E972C5DF31200E7EB4D /* ShoppingViewController.swift */; };
+		E08B3E9A2C5DF5F000E7EB4D /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = E08B3E992C5DF5F000E7EB4D /* Item.swift */; };
+		E08B3E9C2C5DF75400E7EB4D /* ShoppingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E08B3E9B2C5DF75400E7EB4D /* ShoppingTableViewCell.swift */; };
 		E0E50D032C5A05C400B789E2 /* AddNumberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E50D022C5A05C400B789E2 /* AddNumberViewController.swift */; };
 		E0E50D062C5A0E2C00B789E2 /* ValidationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E50D052C5A0E2C00B789E2 /* ValidationViewController.swift */; };
 		E0E50D082C5A723000B789E2 /* SimpleTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E50D072C5A723000B789E2 /* SimpleTableViewController.swift */; };
@@ -56,6 +59,9 @@
 		E02F9D4B2C59354700FC256A /* SwitchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchViewController.swift; sourceTree = "<group>"; };
 		E02F9D4D2C59368C00FC256A /* TextFieldViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldViewController.swift; sourceTree = "<group>"; };
 		E05AF32B2C5D33CB008BB813 /* UIViewController + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController + Extension.swift"; sourceTree = "<group>"; };
+		E08B3E972C5DF31200E7EB4D /* ShoppingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingViewController.swift; sourceTree = "<group>"; };
+		E08B3E992C5DF5F000E7EB4D /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
+		E08B3E9B2C5DF75400E7EB4D /* ShoppingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingTableViewCell.swift; sourceTree = "<group>"; };
 		E0E50D022C5A05C400B789E2 /* AddNumberViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNumberViewController.swift; sourceTree = "<group>"; };
 		E0E50D052C5A0E2C00B789E2 /* ValidationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationViewController.swift; sourceTree = "<group>"; };
 		E0E50D072C5A723000B789E2 /* SimpleTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleTableViewController.swift; sourceTree = "<group>"; };
@@ -148,9 +154,20 @@
 			path = 0731;
 			sourceTree = "<group>";
 		};
+		E08B3E962C5DF30A00E7EB4D /* Shopping */ = {
+			isa = PBXGroup;
+			children = (
+				E08B3E972C5DF31200E7EB4D /* ShoppingViewController.swift */,
+				E08B3E992C5DF5F000E7EB4D /* Item.swift */,
+				E08B3E9B2C5DF75400E7EB4D /* ShoppingTableViewCell.swift */,
+			);
+			path = Shopping;
+			sourceTree = "<group>";
+		};
 		E0E50D0B2C5CABD500B789E2 /* 0801 */ = {
 			isa = PBXGroup;
 			children = (
+				E08B3E962C5DF30A00E7EB4D /* Shopping */,
 				E0E50D132C5CABE600B789E2 /* SignUp */,
 				E0E50D1E2C5CABF500B789E2 /* SignUpOptional */,
 				E0E50D182C5CABEC00B789E2 /* SignIn */,
@@ -287,8 +304,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				E0E50D102C5CABDF00B789E2 /* SignTextField.swift in Sources */,
+				E08B3E9C2C5DF75400E7EB4D /* ShoppingTableViewCell.swift in Sources */,
+				E08B3E982C5DF31200E7EB4D /* ShoppingViewController.swift in Sources */,
 				E02F9D4E2C59368C00FC256A /* TextFieldViewController.swift in Sources */,
 				E0E50D0A2C5A758B00B789E2 /* SubjectViewController.swift in Sources */,
+				E08B3E9A2C5DF5F000E7EB4D /* Item.swift in Sources */,
 				E02F9D422C58DD0300FC256A /* PickerViewController.swift in Sources */,
 				E0E50D082C5A723000B789E2 /* SimpleTableViewController.swift in Sources */,
 				E0E50D032C5A05C400B789E2 /* AddNumberViewController.swift in Sources */,
