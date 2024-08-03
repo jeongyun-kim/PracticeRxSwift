@@ -54,21 +54,36 @@ final class ShoppingViewController: BaseViewController {
     override func setupUI() {
         super.setupUI()
         navigationItem.title = "쇼핑"
+        
         contentView.backgroundColor = Color.gray6
         contentView.layer.cornerRadius = 8
+        
         itemTextField.backgroundColor = Color.gray6
         itemTextField.placeholder = "무엇을 구매하실 건가요?"
+        
         addButton.setTitle("추가", for: .normal)
         addButton.tintColor = Color.gray5
         addButton.setTitleColor(Color.black, for: .normal)
+        
         tableView.register(ShoppingTableViewCell.self, forCellReuseIdentifier: ShoppingTableViewCell.identifier)
         tableView.rowHeight = 60
         tableView.separatorStyle = .none
     }
     
     override func bind() {
+        // 테이블뷰 셀 그리기
         items.bind(to: tableView.rx.items(cellIdentifier: ShoppingTableViewCell.identifier, cellType: ShoppingTableViewCell.self)) { (row, element, cell) in
             cell.configureCell(element)
         }.disposed(by: disposeBag)
+        
+        // 추가버튼 눌렀을 때 아이템 추가
+        addButton.rx.tap
+            .bind(with: self) { owner, _ in
+                guard let name = owner.itemTextField.text, !name.trimmingCharacters(in: .whitespaces).isEmpty else { return }
+                let item = Item(name: name)
+                owner.list.insert(item, at: 0)
+                owner.items.accept(owner.list)
+                owner.itemTextField.text = ""
+            }.disposed(by: disposeBag)
     }
 }
