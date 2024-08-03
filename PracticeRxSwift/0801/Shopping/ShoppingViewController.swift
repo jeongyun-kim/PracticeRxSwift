@@ -106,6 +106,13 @@ final class ShoppingViewController: BaseViewController {
                 owner.navigationController?.pushViewController(vc, animated: true)
             }.disposed(by: disposeBag)
         
+        // 우측에서 좌측으로 스와이프 -> 아이템 삭제 
+        tableView.rx.itemDeleted
+            .bind(with: self) { owner, indexPath in
+                owner.list.remove(at: indexPath.row)
+                owner.items.accept(owner.list)
+            }.disposed(by: disposeBag)
+        
         // 추가버튼 눌렀을 때 아이템 추가
         addButton.rx.tap
             .bind(with: self) { owner, _ in
