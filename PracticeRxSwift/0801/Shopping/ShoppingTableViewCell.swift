@@ -7,22 +7,31 @@
 
 import UIKit
 import SnapKit
+import RxSwift
+import RxCocoa
 
 final class ShoppingTableViewCell: UITableViewCell {
     static let identifier = "ShoppingCell"
     
+    var disposeBag = DisposeBag()
+    
     private let backView = UIView()
     private let completeImageView = UIImageView()
-    private let completeButton = UIButton()
+    let completeButton = UIButton()
     private let nameLabel = UILabel()
     private let bookmarkImageView = UIImageView()
-    private let bookmarkButton = UIButton()
+    let bookmarkButton = UIButton()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupHierarchy()
         setupConstraints()
         setupUI()
+    }
+    
+    override func prepareForReuse() {
+        // 다시 DisposeBag 해주지않으면 완료 표시했을 때, 다른 셀이 막 체크되는 경우가 있음 
+        disposeBag = DisposeBag()
     }
     
     private func setupHierarchy() {

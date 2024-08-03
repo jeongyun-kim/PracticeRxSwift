@@ -74,6 +74,18 @@ final class ShoppingViewController: BaseViewController {
         // 테이블뷰 셀 그리기
         items.bind(to: tableView.rx.items(cellIdentifier: ShoppingTableViewCell.identifier, cellType: ShoppingTableViewCell.self)) { (row, element, cell) in
             cell.configureCell(element)
+            // 완료 버튼 눌렀을 때
+            cell.completeButton.rx.tap
+                .bind(with: self) { owner, _ in
+                    owner.list[row].isComplete.toggle()
+                    owner.items.accept(owner.list)
+                }.disposed(by: cell.disposeBag)
+            // 즐겨찾기 버튼 눌렀을 때
+            cell.bookmarkButton.rx.tap
+                .bind(with: self) { owner, _ in
+                    owner.list[row].bookmark.toggle()
+                    owner.items.accept(owner.list)
+                }.disposed(by: cell.disposeBag)
         }.disposed(by: disposeBag)
         
         // 추가버튼 눌렀을 때 아이템 추가
