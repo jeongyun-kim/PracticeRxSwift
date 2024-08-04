@@ -21,8 +21,10 @@ final class BasicViewController: BaseViewController {
 //        of()
 //        from()
 //        take()
-        replaySubject()
-        asyncSubject()
+//        replaySubject()
+//        asyncSubject()
+      //  debounce()
+        throttle()
     }
     
     override func setupHierarchy() {
@@ -69,87 +71,87 @@ final class BasicViewController: BaseViewController {
         
         // (1)
         // - 기본적인 형태
-        button.rx.tap
-            .subscribe { _ in
-                self.resultLabel.text = "버튼을 클릭했어요!!!"
-            } onError: { error in
-                print(error)
-            } onCompleted: {
-                print("completed!")
-            } onDisposed: {
-                print("disposed!")
-            }.disposed(by: disposeBag)
-
-        // (2)
-        // - Label에 텍스트 세팅은 UI적인 부분이라 Error, Complete(X)
-        // - Error, Complete 이벤트 자체를 받지않는 형태
-        button.rx.tap
-            .subscribe { _ in
-                self.resultLabel.text = "버튼을 클릭했어요!!!"
-            } onDisposed: {
-                print("disposed!")
-            }.disposed(by: disposeBag)
-
-        // (3)
-        // - 메모리 누수 방지 형태
-        button.rx.tap
-            .subscribe { [weak self] _ in
-                guard let self else { return }
-                self.resultLabel.text = "버튼을 클릭했어요!!!"
-            } onDisposed: {
-                print("disposed!")
-            }.disposed(by: disposeBag)
-
-        // (4)
-        // - [weak self] 대신 withUnretained 사용 형태
-        button.rx.tap
-            .withUnretained(self)
-            .subscribe { _ in
-                self.resultLabel.text = "버튼을 클릭했어요!!!"
-            } onDisposed: {
-                print("disposed!")
-            }.disposed(by: disposeBag)
-        
-        // (5)
-        // - subscribe 할 때, with를 통해 self를 옵셔널 바인딩해서 가져옴
-        // - self를 풀어온 owner를 사용해줘야 진짜
-        button.rx.tap
-            .subscribe(with: self) { owner, _ in
-                owner.resultLabel.text = "버튼을 클릭했어요!!!"
-            } onDisposed: { owner in
-                print("disposed!")
-            }.disposed(by: disposeBag)
-        
-        // (6)
-        // - subscribe : 스레드 상관없이 동작해서 백그라운드에서도 동작 가능
-        // - 그러니까 UI와 관련된건 메인에서 처리해달라고 DispatchQueue.main.async 처리해줘야함
-        button.rx.tap
-            .subscribe(with: self, onNext: { owner, _ in
-                DispatchQueue.main.async {
-                    owner.resultLabel.text = "버튼을 클릭했어요!!!"
-                }
-            }, onDisposed: { owner in
-                print("disposed!")
-            }).disposed(by: disposeBag)
-        
-        // (7)
-        // - Rx가 지원해주는 GCD를 사용하자!
-        button.rx.tap
-            .observe(on: MainScheduler.instance)
-            .subscribe(with: self) { owner, _ in
-                owner.resultLabel.text = "버튼을 클릭했어요!!!"
-            } onDisposed: { owner in
-                print("disposed!")
-            }.disposed(by: disposeBag)
-
-        // (8)
-        // - 근데 그럼 또 코드를 한 줄 더 써야하니까 아예 subscribe가 메인스레드에서 동작하게 하자
-        // - 그리고 UI관련 코드는 Error, Complete가 발생할 일이 없으니까 둘을 받지않는 subscribe문을 쓰자
-        // => bind의 등장!
-        button.rx.tap
-            .bind(with: self) { owner, _ in
-                owner.resultLabel.text = "버튼을 클릭했어요!!!"
-            }.disposed(by: disposeBag)
+//        button.rx.tap
+//            .subscribe { _ in
+//                self.resultLabel.text = "버튼을 클릭했어요!!!"
+//            } onError: { error in
+//                print(error)
+//            } onCompleted: {
+//                print("completed!")
+//            } onDisposed: {
+//                print("disposed!")
+//            }.disposed(by: disposeBag)
+//
+//        // (2)
+//        // - Label에 텍스트 세팅은 UI적인 부분이라 Error, Complete(X)
+//        // - Error, Complete 이벤트 자체를 받지않는 형태
+//        button.rx.tap
+//            .subscribe { _ in
+//                self.resultLabel.text = "버튼을 클릭했어요!!!"
+//            } onDisposed: {
+//                print("disposed!")
+//            }.disposed(by: disposeBag)
+//
+//        // (3)
+//        // - 메모리 누수 방지 형태
+//        button.rx.tap
+//            .subscribe { [weak self] _ in
+//                guard let self else { return }
+//                self.resultLabel.text = "버튼을 클릭했어요!!!"
+//            } onDisposed: {
+//                print("disposed!")
+//            }.disposed(by: disposeBag)
+//
+//        // (4)
+//        // - [weak self] 대신 withUnretained 사용 형태
+//        button.rx.tap
+//            .withUnretained(self)
+//            .subscribe { _ in
+//                self.resultLabel.text = "버튼을 클릭했어요!!!"
+//            } onDisposed: {
+//                print("disposed!")
+//            }.disposed(by: disposeBag)
+//        
+//        // (5)
+//        // - subscribe 할 때, with를 통해 self를 옵셔널 바인딩해서 가져옴
+//        // - self를 풀어온 owner를 사용해줘야 진짜
+//        button.rx.tap
+//            .subscribe(with: self) { owner, _ in
+//                owner.resultLabel.text = "버튼을 클릭했어요!!!"
+//            } onDisposed: { owner in
+//                print("disposed!")
+//            }.disposed(by: disposeBag)
+//        
+//        // (6)
+//        // - subscribe : 스레드 상관없이 동작해서 백그라운드에서도 동작 가능
+//        // - 그러니까 UI와 관련된건 메인에서 처리해달라고 DispatchQueue.main.async 처리해줘야함
+//        button.rx.tap
+//            .subscribe(with: self, onNext: { owner, _ in
+//                DispatchQueue.main.async {
+//                    owner.resultLabel.text = "버튼을 클릭했어요!!!"
+//                }
+//            }, onDisposed: { owner in
+//                print("disposed!")
+//            }).disposed(by: disposeBag)
+//        
+//        // (7)
+//        // - Rx가 지원해주는 GCD를 사용하자!
+//        button.rx.tap
+//            .observe(on: MainScheduler.instance)
+//            .subscribe(with: self) { owner, _ in
+//                owner.resultLabel.text = "버튼을 클릭했어요!!!"
+//            } onDisposed: { owner in
+//                print("disposed!")
+//            }.disposed(by: disposeBag)
+//
+//        // (8)
+//        // - 근데 그럼 또 코드를 한 줄 더 써야하니까 아예 subscribe가 메인스레드에서 동작하게 하자
+//        // - 그리고 UI관련 코드는 Error, Complete가 발생할 일이 없으니까 둘을 받지않는 subscribe문을 쓰자
+//        // => bind의 등장!
+//        button.rx.tap
+//            .bind(with: self) { owner, _ in
+//                owner.resultLabel.text = "버튼을 클릭했어요!!!"
+//            }.disposed(by: disposeBag)
     }
     
     private func just() {
@@ -316,6 +318,40 @@ final class BasicViewController: BaseViewController {
         // 이미 Complete 처리돼서 더는 이벤트 전달 X
         asyncSubject.onNext(7)
         asyncSubject.onCompleted()
+    }
+    
+    private func debounce() {
+        // 버튼탭 -> 이벤트 바로 방출되지 않고 일정 시간 후 처리
+        // 그래서 막 눌러도 조금 기다린 후에 count가 1 올라감을 확인할 수 있음
+        // = 여러 번 발생하는 이벤트에서 가장 마지막 이벤트만을 실행
+        var count = 0
+        
+        button.rx.tap
+            .debounce(.seconds(3), scheduler: MainScheduler.instance)
+            .bind(with: self) { owner, _ in
+                count += 1
+                print(count)
+            }.disposed(by: disposeBag)
+    }
+    
+    private func throttle() {
+        // 버튼탭 -> 바로 이벤트 방출
+        // 만약 3초 이내에 버튼을 10번 누른다면
+        // 맨처음 이벤트가 바로 방출돼서 count 1이 찍힘
+        // 그리고 3초가 지났을 때 누적되어있던 이벤트 중 마지막 이벤트가 방출됨
+        // = 여러 번 발생하는 이벤트를 일정 시간동안 한 번만 실행
+        //  => 마지막 새로고침 시간이 1분이 지나지않았다면 실행X 같은 경우에 사용
+        var count = 0
+        
+        // 만약 오직 한 번만 반영되게 하기위해서는 latest = false 처리
+        // 기본값은 true
+        // -> 3초에 한 번씩만 이벤트가 처리됨 
+        button.rx.tap
+            .throttle(.seconds(3), latest: false, scheduler: MainScheduler.instance)
+            .bind(with: self) { owner, _ in
+                count += 1
+                print(count)
+            }.disposed(by: disposeBag)
     }
 }
 
