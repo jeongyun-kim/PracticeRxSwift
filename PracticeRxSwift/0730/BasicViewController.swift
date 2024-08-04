@@ -17,10 +17,12 @@ final class BasicViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        just()
-        of()
-        from()
-        take()
+//        just()
+//        of()
+//        from()
+//        take()
+        replaySubject()
+        asyncSubject()
     }
     
     override func setupHierarchy() {
@@ -216,6 +218,104 @@ final class BasicViewController: BaseViewController {
             } onDisposed: {
                 print("disposed")
             }.disposed(by: disposeBag)
+    }
+    
+    private func replaySubject() {
+        // 이벤트가 얼마나 전달되든 subscribe 시에는 최근에 들어온 버퍼 사이즈만큼의 이벤트를 처리
+        // 제네릭 통해서 가져올 데이터 정의
+        let replay = ReplaySubject<Int>.create(bufferSize: 3)
+        
+        // 이벤트 전달
+        replay.onNext(1)
+        replay.onNext(2)
+        replay.onNext(3)
+        replay.onNext(4)
+        
+        replay
+            .subscribe { value in
+                print("replay \(value)")
+            } onError: { error in
+                print("replay \(error)")
+            } onCompleted: {
+                print("replay completed!")
+            } onDisposed: {
+                print("replay disposed!")
+            }.disposed(by: disposeBag)
+        /*
+         replay 2
+         replay 3
+         replay 4
+         */
+        
+        replay.onNext(5)
+        replay.onNext(6)
+        replay.onNext(7)
+        replay.onNext(8)
+        replay.onNext(9)
+        /*
+         replay 2
+         replay 3
+         replay 4
+         replay 5
+         replay 6
+         replay 7
+         replay 8
+         replay 9
+         */
+        
+        print("=====")
+        
+        replay
+            .subscribe { value in
+                print("replay \(value)")
+            } onError: { error in
+                print("replay \(error)")
+            } onCompleted: {
+                print("replay completed!")
+            } onDisposed: {
+                print("replay disposed!")
+            }.disposed(by: disposeBag)
+        /*
+         replay 7
+         replay 8
+         replay 9
+         */
+    }
+    
+    private func asyncSubject() {
+        // complete를 받아야만 이벤트 전달
+        // 그 때엔 가장 최근 시점에 전달된 이벤트 하나를 함께 전달
+        // 전달할 이벤트의 타입을 제네릭으로 정의
+        let asyncSubject = AsyncSubject<Int>()
+        
+        asyncSubject.onNext(1)
+        asyncSubject.onNext(2)
+        asyncSubject.onNext(3)
+        
+        asyncSubject
+            .subscribe { value in
+                print("async \(value)")
+            } onError: { error in
+                print("async \(error)")
+            } onCompleted: {
+                print("async complted!")
+            } onDisposed: {
+                print("async disposed!")
+            }.disposed(by: disposeBag)
+
+        // Complete 이벤트를 받지않아서 아무런 print문도 실행되지 않음
+        asyncSubject.onNext(30)
+        asyncSubject.onCompleted()
+        // Complete 이후에 최근 이벤트와 함께 전달 => 30이 출력될 것
+        /*
+         async 30
+         async complted!
+         async disposed!
+         */
+    
+        // 이미 Complete 처리돼서 더는 이벤트 전달 X
+        asyncSubject.onNext(7)
+        asyncSubject.onCompleted()
     }
 }
 
