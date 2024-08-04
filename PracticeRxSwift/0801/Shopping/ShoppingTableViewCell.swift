@@ -46,7 +46,7 @@ final class ShoppingTableViewCell: UITableViewCell {
     private func setupConstraints() {
         backView.snp.makeConstraints { make in
             make.horizontalEdges.equalTo(contentView.safeAreaLayoutGuide).inset(16)
-            make.verticalEdges.equalTo(contentView.safeAreaLayoutGuide).inset(2)
+            make.verticalEdges.equalTo(contentView.safeAreaLayoutGuide).inset(4)
         }
         
         completeImageView.snp.makeConstraints { make in

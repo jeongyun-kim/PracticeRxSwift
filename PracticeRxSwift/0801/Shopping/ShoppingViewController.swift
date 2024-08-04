@@ -53,7 +53,7 @@ final class ShoppingViewController: BaseViewController {
     
     override func setupUI() {
         super.setupUI()
-        navigationItem.title = "쇼핑"
+        configureNavigation()
         
         contentView.backgroundColor = Color.gray6
         contentView.layer.cornerRadius = 8
@@ -66,8 +66,9 @@ final class ShoppingViewController: BaseViewController {
         addButton.setTitleColor(Color.black, for: .normal)
         
         tableView.register(ShoppingTableViewCell.self, forCellReuseIdentifier: ShoppingTableViewCell.identifier)
-        tableView.rowHeight = 60
+        tableView.rowHeight = 70
         tableView.separatorStyle = .none
+        tableView.keyboardDismissMode = .onDrag
     }
     
     override func bind() {
@@ -115,12 +116,30 @@ final class ShoppingViewController: BaseViewController {
         
         // 추가버튼 눌렀을 때 아이템 추가
         addButton.rx.tap
-            .bind(with: self) { owner, _ in
-                guard let name = owner.itemTextField.text, !name.trimmingCharacters(in: .whitespaces).isEmpty else { return }
-                let item = Item(name: name)
+            .withLatestFrom(itemTextField.rx.text.orEmpty)
+            .bind(with: self) { owner, itemName in
+                guard !itemName.trimmingCharacters(in: .whitespaces).isEmpty else { return }
+                let item = Item(name: itemName)
                 owner.list.insert(item, at: 0)
                 owner.items.accept(owner.list)
                 owner.itemTextField.text = ""
             }.disposed(by: disposeBag)
+    }
+    
+    private func configureNavigation() {
+        navigationItem.title = "쇼핑"
+        let search = UIBarButtonItem(image: UIImage(systemName: "magnifyingglass"), style: .plain, target: self, action: #selector(searchBtnTapped))
+        navigationItem.rightBarButtonItem = search
+    }
+    
+    @objc private func searchBtnTapped(_ sender: UIButton) {
+        let vc = ShoppingSearchViewController()
+        vc.list = list
+        vc.sendList = { [weak self] list in
+            guard let self else { return }
+            self.list = list
+            self.items.accept(list)
+        }
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
