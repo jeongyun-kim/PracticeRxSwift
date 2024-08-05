@@ -15,7 +15,7 @@ final class NicknameViewController: BaseViewController {
     private let nextButton = PointButton(title: "다음")
     
     private let disposeBag = DisposeBag()
-    private let bgColor = BehaviorRelay(value: UIColor.lightGray)
+    private let vm = NicknameViewModel()
 
     override func setupHierarchy() {
         view.addSubview(nicknameTextField)
@@ -41,24 +41,21 @@ final class NicknameViewController: BaseViewController {
     }
     
     override func bind() {
+        let input = NicknameViewModel.Input(nextButtonTapped: nextButton.rx.tap, nickname: nicknameTextField.rx.text.orEmpty)
+        let output = vm.transform(input)
+        
         // 다음 버튼 누르면 생일뷰로
-        nextButton.rx.tap
+        output.nextButtonTapped
             .bind(with: self) { owner, _ in
                 owner.navigationController?.pushViewController(BirthdayViewController(), animated: true)
             }.disposed(by: disposeBag)
         
-        // 버튼 배경색 변경 
-        bgColor
-            .bind(to: nextButton.rx.backgroundColor)
-            .disposed(by: disposeBag)
-         
         // 닉네임이 2글자 이상 8글자 이하라면
-        nicknameTextField.rx.text.orEmpty
-            .map { 2 <= $0.count && $0.count <= 8}
+        output.isValidNickname
             .bind(with: self) { owner, isValid in
                 let color: UIColor = isValid ? .systemGreen : .lightGray
-                owner.bgColor.accept(color)
                 owner.nextButton.isEnabled = isValid
+                owner.nextButton.backgroundColor = color
             }.disposed(by: disposeBag)
     }
 }

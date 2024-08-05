@@ -17,7 +17,7 @@ final class SignUpViewController: BaseViewController {
     let nextButton = PointButton(title: "다음")
     
     private let disposeBag = DisposeBag()
-    private let bgColor = BehaviorRelay(value: UIColor.lightGray)
+    private let vm = SignUpViewModel()
 
     override func setupHierarchy() {
         view.addSubview(emailTextField)
@@ -57,33 +57,22 @@ final class SignUpViewController: BaseViewController {
     }
     
     override func bind() {
+        // input 생성해서 보내고
+        let input = SignUpViewModel.Input(nextButtonTapped: nextButton.rx.tap, email: emailTextField.rx.text.orEmpty)
+        // output 받아오기
+        let output = vm.transform(input)
+        
         // 다음 버튼 눌렀을 때 화면전환
-        nextButton.rx.tap
+        output.nextButtonTapped
             .bind(with: self) { owner, _ in
                 owner.navigationController?.pushViewController(PasswordViewController(), animated: true)
             }.disposed(by: disposeBag)
         
-        // bgColor 변경될 때마다 nextButton 색상 변경
-        // - 초기값은 lightGray
-        bgColor
-            .bind(to: nextButton.rx.backgroundColor)
-            .disposed(by: disposeBag)
-        
-        // 이메일 입력칸 유효성 확인
-        // - [A-Z0-9a-z._%+-]: 대소문자, 숫자, 특수문자 사용 가능
-        // - +@: []과 []사이에 @가 필수로 들어가게
-        // - [A-Za-z0-9.-]: 대소문자, 숫자 사용 가능
-        // - +\\.: []과 []사이에 .가 필수로 들어가게
-        // -[A-Za-z]: 대소문자 사용 가능
-        // - {2,6}: 앞의 [A-Za-z]를 2~6자리로 제한
-        emailTextField.rx.text.orEmpty
-            .map {
-                let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}"
-                return NSPredicate(format: "SELF MATCHES %@", emailRegex).evaluate(with: $0)
-            }
+        // 유효한 이메일인지 확인하고 UI 변경
+        output.isValidEmail
             .bind(with: self, onNext: { owner, isValid in
                 let color: UIColor = isValid ? .systemGreen : .lightGray
-                owner.bgColor.accept(color)
+                owner.nextButton.backgroundColor = color
                 owner.nextButton.isEnabled = isValid
             })
             .disposed(by: disposeBag)

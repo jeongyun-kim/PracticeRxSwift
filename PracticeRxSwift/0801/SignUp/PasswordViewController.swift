@@ -14,9 +14,9 @@ final class PasswordViewController: BaseViewController {
     let passwordTextField = SignTextField(placeholderText: "비밀번호를 입력해주세요")
     let nextButton = PointButton(title: "다음")
     
+    private let vm = PasswordViewModel()
     private let disposeBag = DisposeBag()
     private let validLabel = UILabel()
-    private let validText = Observable.just("8자 이상 입력해주세요")
     
     override func setupHierarchy() {
         view.addSubview(passwordTextField)
@@ -49,23 +49,27 @@ final class PasswordViewController: BaseViewController {
     }
     
     override func bind() {
+        // input 보내고
+        let input = PasswordViewModel.Input(nextButtonTapped: nextButton.rx.tap, password: passwordTextField.rx.text.orEmpty)
+        // output 받아오기
+        let output = vm.transform(input)
+        
         // 다음 버튼 눌렀을 때 PhoneVC로
-        nextButton.rx.tap
+        output.nextButtonTapped
             .bind(with: self) { owner, _ in
                 let vc = PhoneViewController()
                 owner.navigationController?.pushViewController(vc, animated: true)
             }.disposed(by: disposeBag)
         
         // '8자 이상 입력해주세요' 세팅
-        validText
+        output.validText
             .bind(to: validLabel.rx.text)
             .disposed(by: disposeBag)
         
         // 입력한 비밀번확 8자 이상인지 확인 후 처리
         // - validLabel 숨기기
         // - 컬러 변경하기
-        passwordTextField.rx.text.orEmpty
-            .map { $0.count >= 8 }
+        output.isValidPassword
             .bind(with: self) { owner, isValid in
                 let color: UIColor = isValid ? .systemGreen : .lightGray
                 owner.nextButton.backgroundColor = color
