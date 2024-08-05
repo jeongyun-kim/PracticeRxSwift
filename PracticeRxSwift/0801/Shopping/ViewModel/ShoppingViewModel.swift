@@ -32,7 +32,6 @@ final class ShoppingViewModel {
     }
     
     func transform(_ input: Input) -> Output? {
-        print(#function)
         var list = ItemList().list
         let items = BehaviorRelay(value: list)
         let addedItemTrigger = BehaviorRelay(value: ())
@@ -42,25 +41,20 @@ final class ShoppingViewModel {
             .bind(onNext: { itemName in
                 let item = Item(name: itemName)
                 list.insert(item, at: 0)
-                print(list)
                 items.accept(list)
                 addedItemTrigger.accept(())
             }).disposed(by: disposeBag)
         
         input.removeItem
             .bind { indexPath in
-                print(list)
                 list.remove(at: indexPath.row)
-                print(list)
                 items.accept(list)
             }.disposed(by: disposeBag)
         
         input.renameItem
             .bind { (idx, newItemName) in
-                print(list)
                 list[idx].name = newItemName
                 items.accept(list)
-                print(list)
             }.disposed(by: disposeBag)
         
         input.likeItem
