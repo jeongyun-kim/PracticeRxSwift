@@ -74,7 +74,7 @@ final class ShoppingViewController: BaseViewController {
         let addItem = addButton.rx.tap.withLatestFrom(itemTextField.rx.text.orEmpty)
         let removeItem = tableView.rx.itemDeleted
         let renameItem = PublishRelay<(Int, String)>()
-        let likeItem = PublishRelay<Int>()
+        let completeItem = PublishRelay<Int>()
         let bookmarkItem = PublishRelay<Int>()
         let selectedItem = Observable
             .zip(tableView.rx.itemSelected, tableView.rx.modelSelected(Item.self))
@@ -82,7 +82,7 @@ final class ShoppingViewController: BaseViewController {
         let getNewItemList = PublishRelay<[Item]>()
         
         let input = ShoppingViewModel.Input(addItem: addItem, removeItem: removeItem, 
-                                            renameItem: renameItem, likeItem: likeItem,
+                                            renameItem: renameItem, completeItem: completeItem,
                                             bookmarkItem: bookmarkItem, selectedItem: selectedItem,
                                             searchBtnTapped: searchBtnTapped, getNewItemList: getNewItemList)
         guard let output = vm.transform(input) else { return }
@@ -91,10 +91,11 @@ final class ShoppingViewController: BaseViewController {
         output.items
             .bind(to: tableView.rx.items(cellIdentifier: ShoppingTableViewCell.identifier, cellType: ShoppingTableViewCell.self)) { (row, element, cell) in
             cell.configureCell(element)
+                
             // 완료 버튼 눌렀을 때 ->
                 cell.completeButton.rx.tap
                     .bind { _ in
-                        likeItem.accept(row)
+                        completeItem.accept(row)
                     }.disposed(by: cell.disposeBag)
             // 즐겨찾기 버튼 눌렀을 때
                 cell.bookmarkButton.rx.tap
@@ -128,8 +129,6 @@ final class ShoppingViewController: BaseViewController {
         output.searchBtnTapped
             .bind(with: self) { owner, _ in
                 let vc = ShoppingSearchViewController()
-                // ⚠️ list를 막 변경해줘도 여기서는 원래 상태의 list가 날아감
-                // => 좀 더 굴려볼 것
                 vc.list = output.items.value
                 vc.sendList = { [weak self] list in
                     guard let self else { return }

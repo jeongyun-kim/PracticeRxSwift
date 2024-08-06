@@ -16,7 +16,7 @@ final class ShoppingViewModel {
         let addItem: Observable<ControlProperty<String>.Element>
         let removeItem: ControlEvent<IndexPath>
         let renameItem: PublishRelay<(Int, String)>
-        let likeItem: PublishRelay<Int>
+        let completeItem: PublishRelay<Int>
         let bookmarkItem: PublishRelay<Int>
         let selectedItem: Observable<(ControlEvent<IndexPath>.Element, ControlEvent<Item>.Element)>
         let searchBtnTapped: ControlEvent<()>?
@@ -57,7 +57,7 @@ final class ShoppingViewModel {
                 items.accept(list)
             }.disposed(by: disposeBag)
         
-        input.likeItem
+        input.completeItem
             .bind { idx in
                 list[idx].isComplete.toggle()
                 items.accept(list)
