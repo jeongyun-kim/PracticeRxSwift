@@ -91,8 +91,7 @@ final class ShoppingViewController: BaseViewController {
         output.items
             .bind(to: tableView.rx.items(cellIdentifier: ShoppingTableViewCell.identifier, cellType: ShoppingTableViewCell.self)) { (row, element, cell) in
             cell.configureCell(element)
-                
-            // 완료 버튼 눌렀을 때 ->
+            // 완료 버튼 눌렀을 때
                 cell.completeButton.rx.tap
                     .bind { _ in
                         completeItem.accept(row)
@@ -129,9 +128,8 @@ final class ShoppingViewController: BaseViewController {
         output.searchBtnTapped
             .bind(with: self) { owner, _ in
                 let vc = ShoppingSearchViewController()
-                vc.list = output.items.value
-                vc.sendList = { [weak self] list in
-                    guard let self else { return }
+                vc.vm.list.accept(output.items.value)
+                vc.sendList = { list in
                     getNewItemList.accept(list)
                 }
                 owner.navigationController?.pushViewController(vc, animated: true)
