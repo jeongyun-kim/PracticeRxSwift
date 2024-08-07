@@ -15,14 +15,14 @@ final class ShoppingDetailViewController: BaseViewController {
     private let border = UIView()
     private let infoLabel = UILabel()
     
-    var sendItem: ((String) -> Void)?
+    var sendItem: ((Observable<String>) -> Void)?
     var itemName = BehaviorRelay(value: "")
     private let disposeBag = DisposeBag()
-    
+ 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         guard let itemName = nameTextField.text else { return }
-        sendItem?(itemName)
+        sendItem?(Observable.just(itemName))
     }
     
     override func setupHierarchy() {
@@ -63,7 +63,7 @@ final class ShoppingDetailViewController: BaseViewController {
         
         // 수정중인 상품명에 글자가 하나도 없다면 infoLabel 보여주고 뒤로가기 불가능하게 처리
         nameTextField.rx.text.orEmpty
-            .map { !$0.trimmingCharacters(in: .whitespaces).isEmpty}
+            .map { !$0.trimmingCharacters(in: .whitespaces).isEmpty }
             .bind(with: self) { owner, value in
                 owner.infoLabel.isHidden = value
                 let color = value ? Color.black : Color.lightGray

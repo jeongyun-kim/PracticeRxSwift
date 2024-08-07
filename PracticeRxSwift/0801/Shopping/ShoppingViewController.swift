@@ -115,7 +115,10 @@ final class ShoppingViewController: BaseViewController {
                 // 상세정보에서 상품명을 수정했다면 수정한 이름으로 데이터 재구성
                 vc.sendItem = { newItemName in
                     let row = value.0.row
-                    renameItem.accept((row, newItemName))
+                    newItemName
+                        .map { (row, $0) }
+                        .bind(to: renameItem)
+                        .disposed(by: owner.disposeBag)
                 }
                 owner.navigationController?.pushViewController(vc, animated: true)
             }.disposed(by: disposeBag)
