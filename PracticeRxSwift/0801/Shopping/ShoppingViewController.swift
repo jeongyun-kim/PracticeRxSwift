@@ -90,18 +90,18 @@ final class ShoppingViewController: BaseViewController {
         // 테이블뷰 셀 그리기
         output.items
             .bind(to: tableView.rx.items(cellIdentifier: ShoppingTableViewCell.identifier, cellType: ShoppingTableViewCell.self)) { (row, element, cell) in
-            cell.configureCell(element)
-            // 완료 버튼 눌렀을 때
+                cell.configureCell(element)
+                // 완료 버튼 눌렀을 때
                 cell.completeButton.rx.tap
-                    .bind { _ in
-                        completeItem.accept(row)
-                    }.disposed(by: cell.disposeBag)
-            // 즐겨찾기 버튼 눌렀을 때
+                    .map { row }
+                    .bind(to: completeItem)
+                    .disposed(by: cell.disposeBag)
+                // 즐겨찾기 버튼 눌렀을 때
                 cell.bookmarkButton.rx.tap
-                    .bind { _ in
-                        bookmarkItem.accept(row)
-                    }.disposed(by: cell.disposeBag)
-        }.disposed(by: disposeBag)
+                    .map { row }
+                    .bind(to: bookmarkItem)
+                    .disposed(by: cell.disposeBag)
+            }.disposed(by: disposeBag)
         
         // 테이블뷰 셀 선택 시 상세정보뷰 불러오기
         // - 상세정보로 현재 상품명 보내주기 
@@ -114,7 +114,8 @@ final class ShoppingViewController: BaseViewController {
                 vc.itemName.accept(itemName)
                 // 상세정보에서 상품명을 수정했다면 수정한 이름으로 데이터 재구성
                 vc.sendItem = { newItemName in
-                    renameItem.accept((value.0.row, newItemName))
+                    let row = value.0.row
+                    renameItem.accept((row, newItemName))
                 }
                 owner.navigationController?.pushViewController(vc, animated: true)
             }.disposed(by: disposeBag)

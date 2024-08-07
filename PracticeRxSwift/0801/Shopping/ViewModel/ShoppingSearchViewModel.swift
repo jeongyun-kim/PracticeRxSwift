@@ -127,7 +127,6 @@ final class ShoppingSearchViewModel {
             currentItems[row].name = newName
         }
         
-        //return currentItems
         // 보여지는 데이터 리스트 업데이트
         items.accept(currentItems)
     }

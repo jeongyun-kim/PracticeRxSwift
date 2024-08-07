@@ -77,14 +77,14 @@ final class ShoppingSearchViewController: BaseViewController {
             cell.configureCell(element)
             // - 완료 버튼 눌렀을 때
             cell.completeButton.rx.tap
-                .bind(with: self) { owner, _ in
-                    completeItem.accept(row)
-                }.disposed(by: cell.disposeBag)
+                    .map { row }
+                    .bind(to: completeItem)
+                    .disposed(by: cell.disposeBag)
             // - 즐겨찾기 버튼 눌렀을 때
             cell.bookmarkButton.rx.tap
-                .bind(with: self) { owner, _ in
-                    bookmarkItem.accept(row)
-                }.disposed(by: cell.disposeBag)
+                    .map { row }
+                    .bind(to: bookmarkItem)
+                    .disposed(by: cell.disposeBag)
         }.disposed(by: disposeBag)
         
         // 테이블뷰 셀 선택 시 상세정보뷰 불러오기

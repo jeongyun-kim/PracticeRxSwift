@@ -72,9 +72,8 @@ final class ShoppingViewModel {
             }.disposed(by: disposeBag)
         
         input.getNewItemList
-            .bind(with: self) { owner, itemList in
-                items.accept(itemList)
-            }.disposed(by: disposeBag)
+            .bind(to: items)
+            .disposed(by: disposeBag)
         
         let output = Output(items: items, addedItemTrigger: addedItemTrigger,
                             selectedItem: input.selectedItem, searchBtnTapped: searchBtnTapped)
