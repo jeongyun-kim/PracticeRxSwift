@@ -11,8 +11,6 @@ import RxSwift
 import RxCocoa
 
 final class ShoppingTableViewCell: UITableViewCell {
-    static let identifier = "ShoppingCell"
-    
     var disposeBag = DisposeBag()
     
     private let backView = UIView()
