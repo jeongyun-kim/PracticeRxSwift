@@ -52,6 +52,14 @@
 		E0E50D272C5CABFC00B789E2 /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E50D232C5CABFC00B789E2 /* SearchTableViewCell.swift */; };
 		E0E50D282C5CABFC00B789E2 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E50D242C5CABFC00B789E2 /* SearchViewController.swift */; };
 		E0E50D2A2C5CAC4900B789E2 /* Resource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E50D292C5CAC4900B789E2 /* Resource.swift */; };
+		E0FC06BD2C64F36A00C8057F /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0FC06BC2C64F36A00C8057F /* Movie.swift */; };
+		E0FC06C62C64F40400C8057F /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = E0FC06C52C64F40400C8057F /* Alamofire */; };
+		E0FC06C82C64F4A200C8057F /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0FC06C72C64F4A200C8057F /* APIKey.swift */; };
+		E0FC06CA2C64F50B00C8057F /* MovieNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0FC06C92C64F50B00C8057F /* MovieNetwork.swift */; };
+		E0FC06CC2C64FC7800C8057F /* MovieViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0FC06CB2C64FC7800C8057F /* MovieViewController.swift */; };
+		E0FC06CE2C64FEE100C8057F /* MovieViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0FC06CD2C64FEE100C8057F /* MovieViewModel.swift */; };
+		E0FC06D02C6505FC00C8057F /* ReusableIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0FC06CF2C6505FC00C8057F /* ReusableIdentifier.swift */; };
+		E0FC06D22C65064800C8057F /* MovieTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0FC06D12C65064800C8057F /* MovieTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -99,6 +107,13 @@
 		E0E50D232C5CABFC00B789E2 /* SearchTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
 		E0E50D242C5CABFC00B789E2 /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		E0E50D292C5CAC4900B789E2 /* Resource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Resource.swift; sourceTree = "<group>"; };
+		E0FC06BC2C64F36A00C8057F /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
+		E0FC06C72C64F4A200C8057F /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
+		E0FC06C92C64F50B00C8057F /* MovieNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieNetwork.swift; sourceTree = "<group>"; };
+		E0FC06CB2C64FC7800C8057F /* MovieViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieViewController.swift; sourceTree = "<group>"; };
+		E0FC06CD2C64FEE100C8057F /* MovieViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieViewModel.swift; sourceTree = "<group>"; };
+		E0FC06CF2C6505FC00C8057F /* ReusableIdentifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReusableIdentifier.swift; sourceTree = "<group>"; };
+		E0FC06D12C65064800C8057F /* MovieTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +122,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E02F9D3E2C58D95000FC256A /* RxSwift in Frameworks */,
+				E0FC06C62C64F40400C8057F /* Alamofire in Frameworks */,
 				E02F9D3C2C58D95000FC256A /* RxCocoa in Frameworks */,
 				E02F9D392C58D94200FC256A /* SnapKit in Frameworks */,
 			);
@@ -135,6 +151,8 @@
 		E02F9D222C58D8C100FC256A /* PracticeRxSwift */ = {
 			isa = PBXGroup;
 			children = (
+				E0FC06BB2C64C6A200C8057F /* Movie */,
+				E0FC06BA2C64C69100C8057F /* iTunes */,
 				E0E50D292C5CAC4900B789E2 /* Resource.swift */,
 				E02F9D3F2C58D99500FC256A /* BaseViewController.swift */,
 				E0E50D0E2C5CABDF00B789E2 /* CustomView */,
@@ -147,6 +165,8 @@
 				E02F9D2E2C58D8C200FC256A /* LaunchScreen.storyboard */,
 				E02F9D312C58D8C200FC256A /* Info.plist */,
 				E05AF32B2C5D33CB008BB813 /* UIViewController + Extension.swift */,
+				E0FC06CF2C6505FC00C8057F /* ReusableIdentifier.swift */,
+				E0FC06C72C64F4A200C8057F /* APIKey.swift */,
 			);
 			path = PracticeRxSwift;
 			sourceTree = "<group>";
@@ -293,6 +313,25 @@
 			path = Search;
 			sourceTree = "<group>";
 		};
+		E0FC06BA2C64C69100C8057F /* iTunes */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = iTunes;
+			sourceTree = "<group>";
+		};
+		E0FC06BB2C64C6A200C8057F /* Movie */ = {
+			isa = PBXGroup;
+			children = (
+				E0FC06BC2C64F36A00C8057F /* Movie.swift */,
+				E0FC06C92C64F50B00C8057F /* MovieNetwork.swift */,
+				E0FC06CB2C64FC7800C8057F /* MovieViewController.swift */,
+				E0FC06CD2C64FEE100C8057F /* MovieViewModel.swift */,
+				E0FC06D12C65064800C8057F /* MovieTableViewCell.swift */,
+			);
+			path = Movie;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -313,6 +352,7 @@
 				E02F9D382C58D94200FC256A /* SnapKit */,
 				E02F9D3B2C58D95000FC256A /* RxCocoa */,
 				E02F9D3D2C58D95000FC256A /* RxSwift */,
+				E0FC06C52C64F40400C8057F /* Alamofire */,
 			);
 			productName = PracticeRxSwift;
 			productReference = E02F9D202C58D8C100FC256A /* PracticeRxSwift.app */;
@@ -345,6 +385,7 @@
 			packageReferences = (
 				E02F9D372C58D94200FC256A /* XCRemoteSwiftPackageReference "SnapKit" */,
 				E02F9D3A2C58D95000FC256A /* XCRemoteSwiftPackageReference "RxSwift" */,
+				E0FC06C42C64F40400C8057F /* XCRemoteSwiftPackageReference "Alamofire" */,
 			);
 			productRefGroup = E02F9D212C58D8C100FC256A /* Products */;
 			projectDirPath = "";
@@ -376,6 +417,7 @@
 				E0E50D102C5CABDF00B789E2 /* SignTextField.swift in Sources */,
 				E08B3E9C2C5DF75400E7EB4D /* ShoppingTableViewCell.swift in Sources */,
 				E08B3E982C5DF31200E7EB4D /* ShoppingViewController.swift in Sources */,
+				E0FC06C82C64F4A200C8057F /* APIKey.swift in Sources */,
 				E02F9D4E2C59368C00FC256A /* TextFieldViewController.swift in Sources */,
 				E0E50D0A2C5A758B00B789E2 /* SubjectViewController.swift in Sources */,
 				E08B3E9A2C5DF5F000E7EB4D /* Item.swift in Sources */,
@@ -385,13 +427,19 @@
 				E0E50D032C5A05C400B789E2 /* AddNumberViewController.swift in Sources */,
 				E08B3EA02C5E038D00E7EB4D /* ShoppingDetailViewController.swift in Sources */,
 				E0E50D212C5CABF500B789E2 /* PhoneViewController.swift in Sources */,
+				E0FC06CC2C64FC7800C8057F /* MovieViewController.swift in Sources */,
 				E02F9D4A2C58E1A300FC256A /* TableViewController.swift in Sources */,
 				E0E50D272C5CABFC00B789E2 /* SearchTableViewCell.swift in Sources */,
+				E0FC06BD2C64F36A00C8057F /* Movie.swift in Sources */,
 				E0E50D192C5CABEC00B789E2 /* SignInViewController.swift in Sources */,
 				E0E50D1F2C5CABF500B789E2 /* BirthdayViewController.swift in Sources */,
+				E0FC06D02C6505FC00C8057F /* ReusableIdentifier.swift in Sources */,
+				E0FC06CE2C64FEE100C8057F /* MovieViewModel.swift in Sources */,
 				E02F9D282C58D8C100FC256A /* BasicViewController.swift in Sources */,
+				E0FC06D22C65064800C8057F /* MovieTableViewCell.swift in Sources */,
 				E0E50D262C5CABFC00B789E2 /* DetailViewController.swift in Sources */,
 				E08B3E9E2C5E028000E7EB4D /* ShoppingSearchViewController.swift in Sources */,
+				E0FC06CA2C64F50B00C8057F /* MovieNetwork.swift in Sources */,
 				E0E4B8B92C60CAC4003DA8C5 /* BirthdayViewModel.swift in Sources */,
 				E0E4B8BB2C60D38D003DA8C5 /* NicknameViewModel.swift in Sources */,
 				E02F9D402C58D99500FC256A /* BaseViewController.swift in Sources */,
@@ -650,6 +698,14 @@
 				minimumVersion = 6.7.1;
 			};
 		};
+		E0FC06C42C64F40400C8057F /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.9.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -667,6 +723,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = E02F9D3A2C58D95000FC256A /* XCRemoteSwiftPackageReference "RxSwift" */;
 			productName = RxSwift;
+		};
+		E0FC06C52C64F40400C8057F /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E0FC06C42C64F40400C8057F /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
