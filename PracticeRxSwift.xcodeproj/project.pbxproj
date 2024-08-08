@@ -151,10 +151,8 @@
 		E02F9D222C58D8C100FC256A /* PracticeRxSwift */ = {
 			isa = PBXGroup;
 			children = (
+				E0FC06D32C650C4600C8057F /* Constant */,
 				E0FC06BB2C64C6A200C8057F /* Movie */,
-				E0FC06BA2C64C69100C8057F /* iTunes */,
-				E0E50D292C5CAC4900B789E2 /* Resource.swift */,
-				E02F9D3F2C58D99500FC256A /* BaseViewController.swift */,
 				E0E50D0E2C5CABDF00B789E2 /* CustomView */,
 				E0E50D0B2C5CABD500B789E2 /* 0801~ */,
 				E02F9D532C5A04CF00FC256A /* 0730 */,
@@ -164,8 +162,6 @@
 				E02F9D2C2C58D8C200FC256A /* Assets.xcassets */,
 				E02F9D2E2C58D8C200FC256A /* LaunchScreen.storyboard */,
 				E02F9D312C58D8C200FC256A /* Info.plist */,
-				E05AF32B2C5D33CB008BB813 /* UIViewController + Extension.swift */,
-				E0FC06CF2C6505FC00C8057F /* ReusableIdentifier.swift */,
 				E0FC06C72C64F4A200C8057F /* APIKey.swift */,
 			);
 			path = PracticeRxSwift;
@@ -313,13 +309,6 @@
 			path = Search;
 			sourceTree = "<group>";
 		};
-		E0FC06BA2C64C69100C8057F /* iTunes */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = iTunes;
-			sourceTree = "<group>";
-		};
 		E0FC06BB2C64C6A200C8057F /* Movie */ = {
 			isa = PBXGroup;
 			children = (
@@ -330,6 +319,17 @@
 				E0FC06D12C65064800C8057F /* MovieTableViewCell.swift */,
 			);
 			path = Movie;
+			sourceTree = "<group>";
+		};
+		E0FC06D32C650C4600C8057F /* Constant */ = {
+			isa = PBXGroup;
+			children = (
+				E0FC06CF2C6505FC00C8057F /* ReusableIdentifier.swift */,
+				E05AF32B2C5D33CB008BB813 /* UIViewController + Extension.swift */,
+				E02F9D3F2C58D99500FC256A /* BaseViewController.swift */,
+				E0E50D292C5CAC4900B789E2 /* Resource.swift */,
+			);
+			path = Constant;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
