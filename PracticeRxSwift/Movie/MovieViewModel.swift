@@ -59,7 +59,9 @@ final class MovieViewModel {
                 }
             }
             .map { "\($0)" }
+            .debug("OxO")
             .flatMap { MovieNetwork.shared.fetchMovieResults($0) } // Observable 껍데기 던지고 나옴
+            .debug("O^O")
             .subscribe(with: self) { owner, movie in // => Movie
                 movieList.accept(movie.boxOfficeResult.dailyBoxOfficeList)
             }.disposed(by: disposeBag)
