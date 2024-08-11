@@ -19,7 +19,7 @@ final class PhotoViewModel {
     
     struct Output {
         let searchResults: BehaviorRelay<[ReceivedPhoto]>
-        let scrollToTop: PublishRelay<Void>
+        let scrollToTop: BehaviorRelay<Bool>
     }
     
     private var keyword = ""
@@ -29,7 +29,7 @@ final class PhotoViewModel {
     
     func transform(_ input: Input) -> Output {
         let list: BehaviorRelay<[ReceivedPhoto]> = BehaviorRelay(value: [])
-        let scroll = PublishRelay<Void>()
+        let scroll = BehaviorRelay(value: false)
         
         input.searchBtnTapped
             .map { $0.lowercased() }
@@ -46,8 +46,11 @@ final class PhotoViewModel {
                         .bind(with: self) { owner, value in
                             owner.keyword = keyword
                             owner.totalPages = value.totalPages
+                            print(owner.page, owner.keyword, owner.totalPages)
                             list.accept(value.results)
-                            scroll.accept(())
+                            // 새로운 결과 받아올 때 스크롤 맨위로
+                            guard list.value.count > 0 else { return scroll.accept(false) }
+                            scroll.accept(true)
                         }.disposed(by: owner.disposeBag)
                 } catch {
                     print("fetch error!")
@@ -74,10 +77,8 @@ final class PhotoViewModel {
                     result
                         .compactMap { $0 }
                         .bind(with: self) { owner, value in
-                            // print(owner.keyword, owner.page, owner.sort, value)
                             var currentList = list.value
                             currentList.append(contentsOf: value.results)
-                            list.accept(currentList)
                         }.disposed(by: owner.disposeBag)
                 } catch {
                     print("fetch error!")

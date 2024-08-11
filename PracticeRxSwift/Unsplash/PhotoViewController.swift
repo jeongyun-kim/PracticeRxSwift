@@ -43,15 +43,18 @@ final class PhotoViewController: BaseViewController {
         let input = PhotoViewModel.Input(searchBtnTapped: searchBtnTapped, prefetchIdxs: prefetchIdxs)
         let output = vm.transform(input)
         
+        // 검색결과 받아와서 CollectionView 구성
         output.searchResults
             .asDriver(onErrorJustReturn: [])
             .drive(collectionView.rx.items(cellIdentifier: PhotoCollectionViewCell.identifier, cellType: PhotoCollectionViewCell.self)) { (row, element, cell) in
                 cell.configureCell(element.urls.small)
             }.disposed(by: disposeBag)
         
+        // 스크롤 위로 보내라는 신호 받아올 때 
         output.scrollToTop
-            .asSignal()
-            .emit(with: self) { owner, _ in
+            .asSignal(onErrorJustReturn: false)
+            .emit(with: self) { owner, value in
+                guard value else { return }
                 owner.collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top, animated: true)
             }.disposed(by: disposeBag)
     }
