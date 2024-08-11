@@ -7,20 +7,24 @@
 
 import Foundation
 import Alamofire
+import RxSwift
 
 final class UnsplashNetwork {
     private init() { }
     static let shared = UnsplashNetwork()
     
-    func fetchSearchResults<T: Decodable>(of: T.Type, request: URLRequest) {
-        AF.request(request)
-            .responseDecodable(of: T.self) { respose in
+    func fetchSearchResults<T: Decodable>(of: T.Type, request: URLRequest) -> Observable<T> {
+        return Observable<T>.create { observer in
+            AF.request(request).responseDecodable(of: T.self) { respose in
                 switch respose.result {
                 case .success(let value):
-                    print(value)
+                    observer.onNext(value)
+                    observer.onCompleted()
                 case .failure(let error):
-                    print(error)
+                    observer.onError(error)
                 }
             }
+            return Disposables.create()
+        }
     }
 }

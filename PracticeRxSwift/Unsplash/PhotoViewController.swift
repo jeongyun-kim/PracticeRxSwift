@@ -11,13 +11,65 @@ import RxSwift
 import RxCocoa
 
 final class PhotoViewController: BaseViewController {
-    override func bind() {
-        let search = Search(keyword: "star", page: 1, sort: "relevant")
-        do {
-            let request = try URLRequestManager.search(query: search).asURLRequest()
-            UnsplashNetwork.shared.fetchSearchResults(of: SearchResults.self, request: request)
-        } catch {
-            print("error!")
+    private let disposeBag = DisposeBag()
+    private let vm = PhotoViewModel()
+    private let searchController = UISearchController()
+    private lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout())
+    
+    override func setupHierarchy() {
+        view.addSubview(collectionView)
+    }
+    
+    override func setupConstraints() {
+        collectionView.snp.makeConstraints { make in
+            make.edges.equalTo(view.safeAreaLayoutGuide)
         }
+    }
+    
+    override func setupUI() {
+        super.setupUI()
+        navigationItem.title = "사진 검색"
+        navigationItem.searchController = searchController
+        searchController.automaticallyShowsCancelButton = false
+        searchController.hidesNavigationBarDuringPresentation = false
+        collectionView.register(PhotoCollectionViewCell.self, forCellWithReuseIdentifier: PhotoCollectionViewCell.identifier)
+    }
+    
+    override func bind() {
+        let searchKeyword = searchController.searchBar.rx.text.orEmpty
+        let searchBtnTapped = searchController.searchBar.rx.searchButtonClicked.withLatestFrom(searchKeyword)
+        let prefetchIdxs = collectionView.rx.prefetchItems
+        
+        let input = PhotoViewModel.Input(searchBtnTapped: searchBtnTapped, prefetchIdxs: prefetchIdxs)
+        let output = vm.transform(input)
+        
+        output.searchResults
+            .asDriver(onErrorJustReturn: [])
+            .drive(collectionView.rx.items(cellIdentifier: PhotoCollectionViewCell.identifier, cellType: PhotoCollectionViewCell.self)) { (row, element, cell) in
+                cell.configureCell(element.urls.small)
+            }.disposed(by: disposeBag)
+        
+        output.scrollToTop
+            .asSignal()
+            .emit(with: self) { owner, _ in
+                owner.collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top, animated: true)
+            }.disposed(by: disposeBag)
+    }
+    
+    private func layout() -> UICollectionViewLayout {
+        let spacing: CGFloat = 4
+        
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.5), heightDimension: .fractionalHeight(1))
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(0.45))
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+        group.interItemSpacing = .fixed(spacing)
+        
+        let section = NSCollectionLayoutSection(group: group)
+        section.interGroupSpacing = spacing
+    
+        let layout = UICollectionViewCompositionalLayout(section: section)
+        return layout
     }
 }
