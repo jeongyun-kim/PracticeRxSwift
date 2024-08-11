@@ -69,6 +69,7 @@
 		E0FC07412C68C52000C8057F /* PhotoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0FC07402C68C52000C8057F /* PhotoViewModel.swift */; };
 		E0FC07432C68C99600C8057F /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0FC07422C68C99600C8057F /* PhotoCollectionViewCell.swift */; };
 		E0FC07462C68C9AB00C8057F /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = E0FC07452C68C9AB00C8057F /* Kingfisher */; };
+		E0FC07482C68E0BF00C8057F /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0FC07472C68E0BF00C8057F /* ViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -131,6 +132,7 @@
 		E0FC073D2C68BF8000C8057F /* PhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoViewController.swift; sourceTree = "<group>"; };
 		E0FC07402C68C52000C8057F /* PhotoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoViewModel.swift; sourceTree = "<group>"; };
 		E0FC07422C68C99600C8057F /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
+		E0FC07472C68E0BF00C8057F /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -347,6 +349,7 @@
 				E05AF32B2C5D33CB008BB813 /* UIViewController + Extension.swift */,
 				E02F9D3F2C58D99500FC256A /* BaseViewController.swift */,
 				E0E50D292C5CAC4900B789E2 /* Resource.swift */,
+				E0FC07472C68E0BF00C8057F /* ViewModel.swift */,
 			);
 			path = Constant;
 			sourceTree = "<group>";
@@ -491,6 +494,7 @@
 				E02F9D282C58D8C100FC256A /* BasicViewController.swift in Sources */,
 				E0FC073A2C68BDA600C8057F /* UnsplashNetwork.swift in Sources */,
 				E0FC06D22C65064800C8057F /* MovieTableViewCell.swift in Sources */,
+				E0FC07482C68E0BF00C8057F /* ViewModel.swift in Sources */,
 				E0E50D262C5CABFC00B789E2 /* DetailViewController.swift in Sources */,
 				E08B3E9E2C5E028000E7EB4D /* ShoppingSearchViewController.swift in Sources */,
 				E0FC07382C68862000C8057F /* TargetType.swift in Sources */,
