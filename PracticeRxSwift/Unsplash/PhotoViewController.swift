@@ -57,6 +57,13 @@ final class PhotoViewController: BaseViewController {
                 guard value else { return }
                 owner.collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top, animated: true)
             }.disposed(by: disposeBag)
+        
+        // 에러메시지 발생 시 토스트 메시지 띄우기 
+        output.errorMessage
+            .asDriver(onErrorJustReturn: "")
+            .drive(with: self) { owner, errorMessage in
+                owner.view.makeToast(errorMessage)
+            }.disposed(by: disposeBag)
     }
     
     private func layout() -> UICollectionViewLayout {

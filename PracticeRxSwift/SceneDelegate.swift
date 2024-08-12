@@ -22,8 +22,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(windowScene: windowScene)
         //let mainView = UINavigationController(rootViewController: SignInViewController())
         //let mainView = UINavigationController(rootViewController: ShoppingViewController())
-        let mainView = UINavigationController(rootViewController: MovieViewController())
-        //let mainView = UINavigationController(rootViewController: PhotoViewController())
+        //let mainView = UINavigationController(rootViewController: MovieViewController())
+        let mainView = UINavigationController(rootViewController: PhotoViewController())
         // 처음 보여질 화면(=탭바)을 root로 설정하고 보여주기
         window?.rootViewController = mainView
         window?.makeKeyAndVisible()
