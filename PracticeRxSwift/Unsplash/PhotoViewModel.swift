@@ -30,7 +30,7 @@ final class PhotoViewModel: ViewModel {
     func transform(_ input: Input) -> Output {
         let list: BehaviorRelay<[ReceivedPhoto]> = BehaviorRelay(value: [])
         let scroll = BehaviorRelay(value: false)
-        
+
         input.searchBtnTapped
             .map { $0.lowercased() }
             .distinctUntilChanged()
@@ -79,6 +79,7 @@ final class PhotoViewModel: ViewModel {
                         .bind(with: self) { owner, value in
                             var currentList = list.value
                             currentList.append(contentsOf: value.results)
+                            list.accept(currentList)
                         }.disposed(by: owner.disposeBag)
                 } catch {
                     print("fetch error!")
