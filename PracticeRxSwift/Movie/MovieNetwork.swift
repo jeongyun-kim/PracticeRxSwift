@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Alamofire
 import RxSwift
 
 private enum NetworkError: Error {
@@ -107,5 +108,21 @@ final class MovieNetwork {
          2024-08-08 23:20:44.526: XD -> Event completed
          2024-08-08 23:20:44.526: XD -> isDisposed
          */
+    }
+    
+    func fetchMovieResultsSingleRT(_ date: String) -> Single<Result<Movie, AFError>> {
+        return Single.create { single -> Disposable in
+            let url = "https://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=\(MovieAPI.key)&targetDt=\(date)"
+            AF.request(url)
+                .responseDecodable(of: Movie.self) { respose in
+                    switch respose.result {
+                    case .success(let value):
+                        single(.success(.success(value)))
+                    case .failure(let error):
+                        single(.success(.failure(error)))
+                    }
+                }
+            return Disposables.create()
+        }
     }
 }

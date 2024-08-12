@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import Toast
 import RxSwift
 import RxCocoa
 
@@ -35,17 +36,22 @@ final class MovieViewController: BaseViewController {
     }
     
     override func bind() {
-        let searchBtnTapped = searchController.searchBar.rx.searchButtonClicked
-            .withLatestFrom(searchController.searchBar.rx.text.orEmpty)
-        
-        let input = MovieViewModel.Input(searchBtnTapped: searchBtnTapped)
+        let keyword = searchController.searchBar.rx.text.orEmpty
+        let searchBtnTapped = searchController.searchBar.rx.searchButtonClicked.withLatestFrom(keyword)
+        let cancelBtnTapped = searchController.searchBar.rx.cancelButtonClicked
+
+        let input = MovieViewModel.Input(searchBtnTapped: searchBtnTapped, cancelBtnTapped: cancelBtnTapped)
         let output = vm.transform(input)
         
         output.movieList
-            .bind(to: tableView.rx.items(cellIdentifier: MovieTableViewCell.identifier, cellType: MovieTableViewCell.self)) { (row, element, cell) in
+            .drive(tableView.rx.items(cellIdentifier: MovieTableViewCell.identifier, cellType: MovieTableViewCell.self)) { (row, element, cell) in
                 cell.configureCell(element.movieNm)
             }.disposed(by: disposeBag)
- 
+        
+        output.errorMessage
+            .drive(with: self) { owner, errorMessage in
+                owner.view.makeToast(errorMessage)
+            }.disposed(by: disposeBag)
     }
     
     private func layout() -> UICollectionViewLayout {
